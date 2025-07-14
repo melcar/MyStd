@@ -27,4 +27,21 @@ mod tests {
         assert!(!(mystd::Option::<i32>::Some(1)).is_some_and(|x| x == 0));
         assert!((mystd::Option::<i32>::Some(1)).is_some_and(|x| x == 1));
     }
+
+    #[test]
+    fn insert() {
+        let mut insert_into = mystd::Option::<i32>::None;
+        insert_into.insert(1);
+        assert!(insert_into.is_some_and(|x| x == 1));
+        insert_into.insert(2);
+        assert!(insert_into.is_some_and(|x| x == 2));
+    }
+
+    #[test]
+    fn as_ref() {
+        let mut option = mystd::Option::<i32>::None;
+        let option_ref = option.as_ref();
+        //option.insert(1);
+        assert!(option_ref.is_some_and(|&x| x == 1));
+    }
 }
