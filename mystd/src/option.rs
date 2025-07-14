@@ -55,4 +55,11 @@ impl<T: Clone> mystd::Option<T> {
             mystd::Option::None => mystd::Option::<U>::None,
         }
     }
+
+    pub fn map_or<U>(self, f: impl FnOnce(T) -> U, or_value: U) -> mystd::Option<U> {
+        match self {
+            mystd::Option::Some(x) => mystd::Option::Some(f(x)),
+            mystd::Option::None => mystd::Option::Some(or_value),
+        }
+    }
 }

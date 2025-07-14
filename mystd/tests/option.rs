@@ -56,4 +56,13 @@ mod tests {
         assert!(text.is_some_and(|s| s == hello_world));
         assert!(text_length.is_some_and(|l| l == hello_world.len()));
     }
+
+    #[test]
+    fn map_or() {
+        let none_case = mystd::Option::<i32>::None;
+        assert!(none_case.map_or(|x| x * 2, 3).is_some_and(|x| x == 3));
+
+        let some_case = mystd::Option::<i32>::Some(1);
+        assert!(some_case.map_or(|x| x * 2,3).is_some_and(|x| x == 2));
+    }
 }
