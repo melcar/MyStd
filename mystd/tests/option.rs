@@ -38,10 +38,22 @@ mod tests {
     }
 
     #[test]
+    fn map() {
+        let none_case = mystd::Option::<i32>::None;
+        assert!(none_case.map(|x| x * 2).is_none());
+
+        let some_case = mystd::Option::<i32>::Some(1);
+        assert!(some_case.map(|x| x * 2).is_some_and(|x| x == 2));
+    }
+
+    #[test]
     fn as_ref() {
-        let mut option = mystd::Option::<i32>::None;
-        let option_ref = option.as_ref();
-        //option.insert(1);
-        assert!(option_ref.is_some_and(|&x| x == 1));
+        //https://doc.rust-lang.org/std/option/enum.Option.html#examples-4
+        let hello_world = "Hello world!".to_string();
+        let text: Option<String> = Some(hello_world.clone());
+        let text_length: Option<usize> = text.as_ref().map(|s| s.len());
+
+        assert!(text.is_some_and(|s| s == hello_world));
+        assert!(text_length.is_some_and(|l| l == hello_world.len()));
     }
 }

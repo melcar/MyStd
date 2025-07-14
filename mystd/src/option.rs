@@ -48,4 +48,11 @@ impl<T: Clone> mystd::Option<T> {
             mystd::Option::None => unreachable!(),
         }
     }
+
+    pub fn map<U>(self, f: impl FnOnce(T) -> U) -> mystd::Option<U> {
+        match self {
+            mystd::Option::Some(x) => mystd::Option::Some(f(x)),
+            mystd::Option::None => mystd::Option::<U>::None,
+        }
+    }
 }
